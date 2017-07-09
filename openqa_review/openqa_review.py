@@ -833,8 +833,11 @@ class ArchReport(object):
                 log.info('Skipping "todo" bugref \'%s\' in \'%s\'' % (bugref, result_list))
                 continue
             bug = result_list[0]
-            issue = Issue(bug['bugref'], bug.get('bugref_href', None), self.args.query_issue_status, self.progress_browser, self.bugzilla_browser)
-            self.issues[issue_state(result_list)][issue_type(bugref)].append(IssueEntry(self.args, self.root_url, result_list, bug=issue))
+            if (bug['state'] in soft_fail_states and args.include_softfails) or bug['state'] not in soft_fail_states:
+                issue = Issue(bug['bugref'], bug.get('bugref_href', None), self.args.query_issue_status,
+                              self.progress_browser, self.bugzilla_browser)
+                self.issues[issue_state(result_list)][issue_type(bugref)]\
+                    .append(IssueEntry(self.args, self.root_url, result_list, bug=issue))
 
         # left to handle are the issues marked with 'todo'
         todo_results = results_by_bugref.get('todo', [])
