@@ -1,0 +1,173 @@
+-------------------------------------------------------------------
+Sat Dec 22 15:48:57 UTC 2018 - Oliver Kurz <okurz@suse.com>
+
+- Update binaries names
+
+-------------------------------------------------------------------
+Mon Dec 10 13:48:03 UTC 2018 - okurz@suse.com
+
+- Adapt upstream target to os-autoinst
+
+-------------------------------------------------------------------
+Thu Feb  8 09:26:55 UTC 2018 - okurz@suse.com
+
+- Adapt license file location according to new suggestion around %license
+
+-------------------------------------------------------------------
+Thu Feb  1 19:37:05 UTC 2018 - okurz@suse.com
+
+- Fix test package name ambiguity
+
+-------------------------------------------------------------------
+Tue Dec 19 17:46:07 UTC 2017 - okurz@suse.com
+
+- Update to version 1.8.0+4.0e08e33:
+  * Support multi-distri job groups with openQA#037ffd33
+  * Provide job references in failed soft-fail parsing
+  * Add review wrapper script for 'functional' group on openqa.suse.de
+  * Handle disconnects by remote end on API get gracefully
+  * browser: Status code is not always available on error
+  * setup.py: Correct name of tests_require
+  * Project is no production stable
+  * Only require separate configparser for python2
+
+-------------------------------------------------------------------
+Sun Dec 17 13:38:22 UTC 2017 - okurz@suse.com
+
+- Provide singlespec file with update-alternatives including self-test
+  * Better multibuild-evaluation with valid syntax allowing local use of
+    '-M test'
+  * Complete runtime requirements including "python-setuptools"
+  * Complete set of scripts for both python2 and python3
+  * Package self-test for all repositories and python2/python3
+
+-------------------------------------------------------------------
+Sat Dec 16 12:24:18 UTC 2017 - okurz@suse.com
+
+- Update to version 1.8.0+0.425bb95:
+  * Support multi-distri job groups with openQA#037ffd33
+  * Provide job references in failed soft-fail parsing
+  * Add review wrapper script for 'functional' group on openqa.suse.de
+  * Handle disconnects by remote end on API get gracefully
+- Convert to singlespec
+
+-------------------------------------------------------------------
+Fri Sep 01 12:39:50 UTC 2017 - okurz@suse.com
+
+- Update to version 1.7.4+1.60e66e8:
+  * Get bugref details for softfails as well
+  * Split big 'bugrefs' test into more subtests
+  * Remove not used variables (#70)
+  * Also parse soft-fail needles
+  * Extend soft-fail issue tracker support
+  * Fix error 401 on redmine after server side ngingx update
+  * Ignore cscope.out
+  * Fix whitespace as reported by flake8
+  * Fix handling of dotted build numbers parsing from comments
+  * Add preliminary tumblesle release script for SLE 15
+
+-------------------------------------------------------------------
+Fri Mar  3 05:07:35 UTC 2017 - okurz@suse.com
+
+- Fix import error on backports.configparser by workaround (boo#1025589)
+
+-------------------------------------------------------------------
+Thu Jan 26 07:08:08 UTC 2017 - opensuse-packaging@opensuse.org
+
+- Update to version 1.4.1+0.f1b6807:
+  * Simplify script usage (#13)
+  * Add Browser cache (#15)
+  * Be more strict about bugrefs read on openQA webpages
+  * Use Objects to handle Issues and ArchReport
+  * Add .swp files to .gitignore
+  * Fix soft failed: Use new 'result_softfailed' str
+  * TODO: Add idea about bug reporting links
+  * Add ArchReports and IssueEntry obj (#19)
+  * '-r' and '-T' are not mutually exclusive anymore
+  * Get objects up into the main function (#22)
+  * Fix arch matching (#23)
+  * Treat incomplete->failed as new failures
+  * Display ticket priority (#25)
+  * Show __doc__ as port of help
+  * Add links to verbose reports to directly report bugs
+  * Use host specific issue tracker product mapping
+  * Ensure multiple missing archs are sorted
+  * Add more information to bug report links
+  * report_links: Make 'latest' a link in markdown format
+  * wip -- add bug report links, also for progress, for later
+  * TODO: correct indendation of some entries
+  * TODO: Remove implemented bug reporting links
+  * browser: Support saving pages with unicode content in python2
+  * issue_report_link: Support non-digit builds
+  * issue_report_link: Handle non-existing product mapping option gracefully
+  * Allow filtering for closed / unassigned bugs
+  * TODO: Add some ideas
+  * Add dashboard generation script
+  * Store dashboard file at common "bin" location
+  * Delete unnecessary bootstrap.js and font files
+  * Add LICENSE.GPL-2 for files under dashboard_files/
+  * dashboard: Use robust 'sh -e' shebang
+  * Add bin/openqa_review_osd_daily_email script
+  * dashboard: Make all variables options with defaults
+  * dashboard: Replace three-step sed replace by proper template replace
+  * dashboard: Customize logo with a big 'R' on top for 'review'
+  * Merge 'dashboard' and 'openqa_review_osd_daily_email'
+  * issue_report_link: Fix unsupported failures without failed modules
+  * TODO: Mark 'use test verbosity for existing' as fixed
+  * Do not fail when there are no closed/unass bugs (#28)
+  * Fix #21: Put hr to own line and use md syntax (#29)
+  * Make hr between products on dashboard page thicker (#31)
+  * Fix ") in issue subject breaking markdown (#30)
+  * Support new-style progress bars of openQA
+  * tests: Correct test files for 'after_61b4db60'
+  * Prevent "no builds" found for weird combination of python packages for some users
+  * Debug output for 'not enough builds'
+  * Get rid of possibly already covered exception handling
+  * bin: Mark script as executable
+  * dashboard: Customize html header content, e.g. title
+  * tumblesle_release: Regard 'softfailed' in newer versions of openQA as passed
+  * Fix crash on new-style 'empty builds'
+  * Add comment regarding a bug in legacy openQA parsing of empty builds
+  * Add tumblesle example scripts
+  * Use index.json to get job groups (#36)
+  * Prepare for wellformed json (#38)
+  * Fix #41: Handle broken bugrefs gracefully (#42)
+  * Fix for parent groups: Use API to get job_groups (#43)
+  * Use JSON version of group_overview (#44)
+  * TODO: Add entry about configparser travis error
+  * Ensure configparser is available for py2+3
+  * Fix py27 errors only observable on travis
+  * Handle job groups with builds not having any 'done' jobs at all
+  * Try to get distri/version for each build (#47)
+  * Ensure proper URL concatenation on py2 for bug details retrieval
+  * Show parent group in report (#48)
+  * Add tumblesle helper script for 12sp3
+  * Add update_jekyll for tumblesle release
+  * Use blank build value without version prefix (#51)
+  * Comment on old bugs with new failed test url (#50)
+  * Fix flake8 reported issues after 48fb659
+  * Fix parsing of job groups after openQA#9b50b22
+  * Run all envs on travis
+  * Add command line option for '--min-days-unchanged' for reminder comments
+  * Ignore builds which have an actual empty build value
+
+-------------------------------------------------------------------
+Tue Sep 13 12:01:26 UTC 2016 - opensuse-packaging@opensuse.org
+
+- Update to version 0.8.1+5.815c1be:
+  * Let --query-issue-status" arg implie --bugrefs (#11)
+  * Extract Browser into module
+  * Extract report generator object for 'new issue'
+  * Use absolute imports for python2
+  * Fix 'missing architectures' entry not yielding proper table row
+  * Fix D403 style issues
+  * Prevent flake8 check running on existing .tox dir
+  * Ensure proper python2+3 testing on different distributions
+  * TODO: DONE "Using labels …" with commit fd1b373
+  * TODO: DONE "package for openSUSE"
+
+-------------------------------------------------------------------
+Sun Jan 24 12:16:00 UTC 2016 - okurz@suse.de
+
+- initial package
+
