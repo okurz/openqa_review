@@ -561,6 +561,7 @@ def test_reminder_comments_are_ignored_on_no_reminder(mocker: MockerFixture) -> 
     args.dry_run = True
     args.include_softfails = True
     args.query_issue_status = True
+    args.reopen = True
     report = openqa_review.generate_report(args)
     # there should be no comment with default WONTFIX|NO_REMINDER softfail pattern
     openqa_review.reminder_comment_on_issues(report, args)
@@ -757,6 +758,7 @@ def test_querying_last_comment_of_unknown_bugrefs() -> None:
 def test_reopening_progress_issue(mocker: MockerFixture) -> None:
     browser_mock = mocker.patch.object(Browser, "json_rest")
     args = cache_test_args_factory()
+    args.reopen = True
     issue = issue_factory("poo#102440", "https://progress.opensuse.org/issues/102440", args)
     issue.status = "Resolved"
     issue.reopen("Test note")
@@ -781,6 +783,7 @@ def test_reopening_progress_issue(mocker: MockerFixture) -> None:
 def test_reopening_bugzilla_ticket(mocker: MockerFixture) -> None:
     browser_mock_rpc = mocker.patch.object(Browser, "json_rpc_post")
     args = cache_test_args_factory()
+    args.reopen = True
     issue = issue_factory("boo#0815", "https://bugzilla.opensuse.org/show_bug.cgi?id=0815", args)
     issue.status = "RESOLVEd"
     issue.reopen("Test note")
