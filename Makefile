@@ -1,0 +1,55 @@
+SOURCE_FILES ?= $(shell git ls-files "**.py")
+
+.PHONY: all
+all:
+
+.PHONY: only-test
+only-test:
+	python3 -m pytest
+
+.PHONY: ruff
+ruff:
+	ruff check
+	ruff format --check
+
+.PHONY: tidy
+tidy:
+	ruff format
+	ruff check --fix
+
+.PHONY: check-conventions
+check-conventions:
+	@if git grep -nE '^\s*@(unittest\.mock\.|mock\.)?patch' tests/; then \
+		echo "Error: @patch decorator detected. Avoid to prevent argument ordering bugs."; \
+		echo "   Fix: Use the 'mocker' fixture (pytest-mock) or a 'with patch():' context manager."; \
+		exit 1; \
+	fi
+
+.PHONY: check-maintainability
+check-maintainability:
+	@echo "Checking maintainability (grade B or worse) …"
+	@radon mi ${SOURCE_FILES} -n B | (! grep ".")
+
+.PHONY: check-code-health
+check-code-health:
+	@echo "Checking code health…"
+	@vulture ${SOURCE_FILES} --min-confidence 80
+
+.PHONY: typecheck
+typecheck:
+	PYRIGHT_PYTHON_FORCE_VERSION=latest pyright --skipunannotated --warnings
+
+.PHONY: only-test-with-coverage
+only-test-with-coverage:
+	python3 -m pytest -v --cov --cov-report=xml --cov-report=term-missing
+
+# aggregate targets
+
+.PHONY: checkstyle
+checkstyle: ruff check-conventions check-maintainability check-code-health typecheck
+
+.PHONY: test
+test: only-test checkstyle
+
+.PHONY: test-with-coverage
+test-with-coverage: only-test-with-coverage checkstyle
