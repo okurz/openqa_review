@@ -28,14 +28,14 @@ from openqa_review.tumblesle_release import UnsupportedRsyncArgsError
 
 
 @contextlib.contextmanager
-def TemporaryDirectory() -> Generator[str, None, None]:  # noqa: N802
+def TemporaryDirectory() -> Generator[str, None, None]:  # ruff: ignore[invalid-function-name]
     temp_dir = tempfile.mkdtemp()
     yield temp_dir
     shutil.rmtree(temp_dir)
 
 
 @contextlib.contextmanager
-def TumblesleDirectory(args: Namespace) -> Generator[str, None, None]:  # noqa: N802
+def TumblesleDirectory(args: Namespace) -> Generator[str, None, None]:  # ruff: ignore[invalid-function-name]
     with TemporaryDirectory() as tmp_dir:
         tmp_path = Path(tmp_dir)
         args.src = str(tmp_path / "src") + "/"
@@ -73,7 +73,7 @@ def args() -> Namespace:
     args.verbose = 5
     args.dry_run = True
     args.dry_run_rsync = False
-    args.config_path = "/tmp/this/file/does/not/exist"  # noqa: S108
+    args.config_path = "/tmp/this/file/does/not/exist"  # ruff: ignore[hardcoded-temp-file]
     args.openqa_host = "https://openqa.opensuse.org"
     args.product = "Leap 42.2"
     args.group_id = 19
@@ -87,7 +87,7 @@ def args() -> Namespace:
     args.sleeptime = 0
     args.load = True
     args.load_dir = Path(__file__).resolve().parent / "tumblesle/0046_0056_new_release"
-    args.dest = "/tmp/"  # noqa: S108
+    args.dest = "/tmp/"  # ruff: ignore[hardcoded-temp-file]
     args.post_release_hook = None
     args.seen_maxlen = 1
     # Enable saving and disable loading if you want to add new test data downloaded from hosts
@@ -170,7 +170,7 @@ def test_tagged_not_yet_implemented(args: Namespace) -> None:
 
 
 def test_unsafe_rsync_args_are_catched(args: Namespace) -> None:
-    args.src = "/tmp/foo"  # noqa: S108
+    args.src = "/tmp/foo"  # ruff: ignore[hardcoded-temp-file]
     with pytest.raises(UnsupportedRsyncArgsError):
         tumblesle_release.TumblesleRelease(args).run()
 

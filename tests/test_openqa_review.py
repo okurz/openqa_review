@@ -73,7 +73,7 @@ def browser_factory(args: Namespace | None = None) -> Browser:
 
 
 @contextlib.contextmanager
-def TemporaryDirectory() -> Generator[str, None, None]:  # noqa: N802
+def TemporaryDirectory() -> Generator[str, None, None]:  # ruff: ignore[invalid-function-name]
     temp_dir = tempfile.mkdtemp()
     yield temp_dir
     shutil.rmtree(temp_dir)
